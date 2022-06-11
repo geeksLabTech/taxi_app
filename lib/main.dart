@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MaterialApp(  
+      home: MaterialApp(
         home: const LoginPage(),
         title: 'Taxi App',
         debugShowCheckedModeBanner: false,
@@ -30,4 +30,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

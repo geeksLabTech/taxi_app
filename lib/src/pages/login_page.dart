@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:taxi_app/src/widgets/blue_button.dart';
 
@@ -58,9 +57,9 @@ class __FormState extends State<_Form> {
       child: Column(
         children: <Widget>[
           CustomInput(
-            icon: Icons.mail_outline,
-            placeholder: 'Correo',
-            keyboardType: TextInputType.emailAddress,
+            icon: Icons.phone,
+            placeholder: 'Teléfono',
+            keyboardType: TextInputType.phone,
             textController: emailCtrl,
           ),
           CustomInput(
@@ -69,10 +68,7 @@ class __FormState extends State<_Form> {
             textController: passCtrl,
             isPassword: true,
           ),
-          BlueButton(
-            text: 'Ingrese',
-            onPressed: (){}
-          )
+          BlueButton(text: 'Ingrese', onPressed: () {})
         ],
       ),
     );
