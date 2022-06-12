@@ -13,9 +13,13 @@ class InitialScreenPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: _scaffoldKey,
       drawer: homeDrawer(),
-      body: homeMap(),
+      body: homeMap(scaffoldKey: _scaffoldKey),
     );
   }
 }

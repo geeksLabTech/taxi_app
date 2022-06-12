@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:taxi_app/src/widgets/round_button.dart';
 
 class homeMap extends StatelessWidget {
-  const homeMap({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  const homeMap({required this.scaffoldKey, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class homeMap extends StatelessWidget {
                     height: 35,
                     child: RoundButton(
                       child: Icons.menu,
-                      onPressed: () {},
+                      onPressed: () => scaffoldKey.currentState?.openDrawer(),
                       color: Colors.white,
                       background: Colors.blue,
                     )),
