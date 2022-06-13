@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:taxi_app/src/styles/style_drawer_items.dart';
 
 class homeDrawer extends StatelessWidget {
   const homeDrawer({Key? key}) : super(key: key);
@@ -13,54 +16,49 @@ class homeDrawer extends StatelessWidget {
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: <Widget>[
-          Row(
-            // round image with name and email
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 20, top: 20),
-                width: 35,
-                height: 35,
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/user.png'),
-                ),
-              ),
-              Spacer(),
-              Column(
+          Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
                 children: [
-                  Text(
-                    'John Doe',
-                    style: textTheme.headline6,
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 20, right: 20),
+                    width: 80,
+                    height: 80,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/user.png'),
+                    ),
                   ),
-                  Text(
-                    "+53 59999999",
-                    style: textTheme.subtitle1,
+                  Column(
+                    children: [
+                      Text(
+                        'John Doe',
+                        style: drawerListTileStyleText,
+                      ),
+                      Text(
+                        "+53 59999999",
+                        style: drawerPersonalInfoStyleText,
+                      ),
+                    ],
                   ),
                 ],
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Header',
-              style: textTheme.headline6,
-            ),
-          ),
+              )),
           Divider(
             height: 1,
             thickness: 1,
           ),
           ListTile(
-            leading: Icon(Icons.add_location_alt_rounded),
-            title: Text('My Places'),
+            leading:
+                Icon(Icons.add_location_alt_rounded, color: Colors.blue[800]),
+            title: Text('My Places', style: drawerListTileStyleText),
           ),
           ListTile(
-            leading: Icon(Icons.history),
-            title: Text('History'),
+            leading: Icon(Icons.history, color: Colors.blue[800]),
+            title: Text('History', style: drawerListTileStyleText),
           ),
           ListTile(
-            leading: Icon(Icons.settings_suggest_rounded),
-            title: Text('Preferences'),
+            leading:
+                Icon(Icons.settings_suggest_rounded, color: Colors.blue[800]),
+            title: Text('Preferences', style: drawerListTileStyleText),
           ),
           Divider(
             height: 1,
@@ -73,8 +71,8 @@ class homeDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.bookmark),
-            title: Text('Item A'),
+            leading: Icon(Icons.bookmark, color: Colors.blue[800]),
+            title: Text('Item A', style: drawerListTileStyleText),
           ),
         ],
       ),
