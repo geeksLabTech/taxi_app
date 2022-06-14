@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:taxi_app/src/widgets/bottom_details_widget.dart';
 import 'package:taxi_app/src/widgets/custom_input_widget.dart';
 import 'package:taxi_app/src/widgets/round_button.dart';
 
@@ -70,21 +71,9 @@ class InitialScreenPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                SizedBox.expand(child: DraggableScrollableSheet(
-                  builder: (BuildContext context,
-                      ScrollController scrollController) {
-                    return Container(
-                        color: Colors.blue[100],
-                        child: ListView.builder(
-                            controller: scrollController,
-                            itemCount: 25,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ListTile(title: Text('Item $index'));
-                            }));
-                  },
-                )),
               ],
-            )
+            ),
+            BottomDetails(),
           ],
         )));
   }
