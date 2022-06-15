@@ -64,7 +64,7 @@ class __FormState extends State<_Form> {
           ),
           CustomInput(
             icon: Icons.phone,
-            placeholder: 'teléfono',
+            placeholder: 'Teléfono',
             keyboardType: TextInputType.phone,
             textController: emailCtrl,
           ),
