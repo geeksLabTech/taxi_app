@@ -13,7 +13,10 @@ class BottomDetails extends StatelessWidget {
       maxChildSize: .6,
       builder: (BuildContext context, ScrollController scrollController) {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
           child: Container(
             color: Colors.lightBlue[100],
             child: ListView(
