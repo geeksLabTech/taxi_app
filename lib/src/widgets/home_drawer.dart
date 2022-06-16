@@ -57,11 +57,15 @@ class homeDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.history, color: Colors.blue[800]),
             title: Text('History', style: drawerListTileStyleText),
+            onTap: () {
+              Navigator.pushNamed(context, 'history');
+            },
           ),
           ListTile(
             leading:
                 Icon(Icons.settings_suggest_rounded, color: Colors.blue[800]),
             title: Text('Preferences', style: drawerListTileStyleText),
+            onTap: () {},
           ),
           Divider(
             height: 1,

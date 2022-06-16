@@ -26,7 +26,7 @@ class BlueButton extends StatelessWidget {
         shape: MaterialStateProperty.all(StadiumBorder()),
       ),
       onPressed: () {
-        Navigator.pushReplacementNamed(context, 'initial');
+        Navigator.pushReplacementNamed(context, 'home');
       },
       child: Container(
         width: double.infinity,
