@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:taxi_app/src/data/providers/remote/passenger_provider.dart';
 import 'package:taxi_app/src/models/passenger.dart';
 import 'package:taxi_app/src/pages/edit_profile.dart';
-import 'package:taxi_app/src/services/passenger_service.dart';
 import 'package:taxi_app/src/widgets/passenger_stats.dart';
 import 'package:taxi_app/src/widgets/profile_photo.dart';
 
@@ -15,7 +16,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = PassengerPreferences.myUser;
+    final passengerProvider = GetIt.I<PassengerProvider>();
+    final user = passengerProvider.currentPassenger();
 
     return Scaffold(
       appBar: AppBar(
