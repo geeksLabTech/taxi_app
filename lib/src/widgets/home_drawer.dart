@@ -51,7 +51,7 @@ class homeDrawer extends StatelessWidget {
                 Icon(Icons.add_location_alt_rounded, color: Colors.blue[800]),
             title: Text('My Places', style: drawerListTileStyleText),
             onTap: () {
-              // Navigator.pushNamed(context, '')
+              Navigator.pushNamed(context, 'places');
             },
           ),
           ListTile(
@@ -81,7 +81,7 @@ class homeDrawer extends StatelessWidget {
             leading: Icon(Icons.person, color: Colors.blue[800]),
             title: Text('Profile', style: drawerListTileStyleText),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'profile');
+              Navigator.pushNamed(context, 'profile');
             },
           ),
         ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_app/src/models/trip.dart';
+import 'package:taxi_app/src/models/place.dart';
 
-class TripTileWidget extends StatelessWidget {
-  final Trip trip;
-  const TripTileWidget({Key? key, required this.trip}) : super(key: key);
+class PlaceTileWidget extends StatelessWidget {
+  final Place place;
+  const PlaceTileWidget({Key? key, required this.place}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class TripTileWidget extends StatelessWidget {
                 children: [
                   const Text("John Doe"),
                   Row(
-                    children: [
+                    children: const <Widget>[
                       Icon(Icons.star, color: Colors.yellow),
                       Text("4.9"),
                     ],
@@ -40,14 +40,14 @@ class TripTileWidget extends StatelessWidget {
               ),
             ),
             Column(
-              children: [
+              children: const <Widget>[
                 Text("Final Cost"), // grey small
                 Text("\$100"), //black big
               ],
             ),
             Spacer(),
             Column(
-              children: [
+              children: const <Widget>[
                 Text("Time"), // grey small
                 Text("00:15"), //black big
               ],
@@ -59,7 +59,7 @@ class TripTileWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     Row(
-                      children: [
+                      children: const <Widget>[
                         Icon(Icons.location_on),
                         Text("Universidad de La Habana"),
                         Spacer(),
@@ -67,12 +67,12 @@ class TripTileWidget extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      children: [
+                      children: const <Widget>[
                         Icon(Icons.more_vert),
                       ],
                     ),
                     Row(
-                      children: [
+                      children: const <Widget>[
                         Icon(Icons.trip_origin),
                         Text("Teatro Nacional"),
                         Spacer(),

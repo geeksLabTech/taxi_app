@@ -18,6 +18,12 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = PassengerPreferences.myUser;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: Container(
         margin: EdgeInsets.only(top: 50),
         child: ListView(

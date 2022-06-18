@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:taxi_app/src/models/trip.dart';
-import 'package:taxi_app/src/services/trip_history.dart';
 import 'package:taxi_app/src/widgets/trip_tile_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
+import '../data/providers/remote/trip_provider.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -51,7 +53,8 @@ class _HistoryPageState extends State<HistoryPage> {
   }
 
   Widget tripsData(String filter) {
-    final List<Trip> history = getHistory(filter);
+    final tripProvider = GetIt.I<TripProvider>();
+    final List<Trip> history = tripProvider.getAllTripsFiltered(filter);
     return ListView.builder(
       shrinkWrap: true,
       itemCount: history.length,

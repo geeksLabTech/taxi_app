@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taxi_app/src/pages/history_page.dart';
 import 'package:taxi_app/src/pages/home_page.dart';
 import 'package:taxi_app/src/pages/initial_screen_page.dart';
+import 'package:taxi_app/src/pages/personal_places_page.dart';
 import 'package:taxi_app/src/pages/sign_up_page.dart';
 import 'package:taxi_app/src/pages/trip_creation_page.dart';
 
@@ -18,4 +19,5 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'trips': (_) => TripsPage(),
   'profile': (_) => ProfilePage(),
   'history': (_) => HistoryPage(),
+  'places': (_) => PersonalPlacesPage(),
 };
