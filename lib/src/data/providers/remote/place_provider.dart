@@ -14,8 +14,14 @@ class PlaceProvider {
     final response = await http.get(Uri.parse(uri));
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
-      List<Place> places =
-          List<Place>.from(l.map((model) => Place.fromJson(model)));
+      final places = List<Place>.from(l.map((model) {
+        return Place(
+            address: model['address'],
+            name: model['name'],
+            latitude: model['latitude'],
+            longitude: model['longitude']);
+      }));
+      return places;
     }
 
     throw Exception('Failed to load data');

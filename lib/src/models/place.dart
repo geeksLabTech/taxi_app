@@ -10,4 +10,6 @@ class Place {
     required this.latitude,
     required this.longitude,
   });
+
+  static fromJson(jsonDecode) {}
 }

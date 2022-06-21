@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:taxi_app/src/models/place.dart';
+import 'package:taxi_app/src/data/models/place_model.dart';
 import 'package:taxi_app/src/widgets/place_tile_widget.dart';
 import 'package:taxi_app/src/data/providers/remote/place_provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -33,15 +33,23 @@ class _PersonalPlacesPageState extends State<PersonalPlacesPage> {
 
   Widget placesData() {
     final placeProvider = GetIt.I<PlaceProvider>();
-    final List<Place> places = placeProvider.getAllPlaces();
 
-    print(places.length);
-
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: places.length,
-      itemBuilder: (context, index) {
-        return PlaceTileWidget(place: places[index]);
+    return FutureBuilder(
+      future: placeProvider.getAllPlaces(),
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: snapshot.data?.length,
+            itemBuilder: (context, index) {
+              return PlaceTileWidget(place: snapshot.data?[index]);
+            },
+          );
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
