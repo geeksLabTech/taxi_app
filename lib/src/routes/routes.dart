@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_app/src/pages/add_edit_place.dart';
 import 'package:taxi_app/src/pages/history_page.dart';
 import 'package:taxi_app/src/pages/home_page.dart';
 import 'package:taxi_app/src/pages/initial_screen_page.dart';
@@ -20,4 +21,5 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'profile': (_) => ProfilePage(),
   'history': (_) => HistoryPage(),
   'places': (_) => PersonalPlacesPage(),
+  'place_detail': (_) => AddEditPlacePage(),
 };

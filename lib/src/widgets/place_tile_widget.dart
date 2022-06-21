@@ -7,84 +7,61 @@ class PlaceTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: Container(
-        color: Colors.grey[200],
-        margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.all(20),
-        child: Column(children: [
-          Row(children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: const Image(
-                image: AssetImage(
-                  'assets/images/user.png',
-                ),
-                width: 40,
-                height: 40,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  const Text("John Doe"),
-                  Row(
-                    children: const <Widget>[
-                      Icon(Icons.star, color: Colors.yellow),
-                      Text("4.9"),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Column(
-              children: const <Widget>[
-                Text("Final Cost"), // grey small
-                Text("\$100"), //black big
-              ],
-            ),
-            Spacer(),
-            Column(
-              children: const <Widget>[
-                Text("Time"), // grey small
-                Text("00:15"), //black big
-              ],
-            ),
-          ]),
-          Row(
-            children: [
+    return ListTile(
+      onTap: (() => Navigator.pushNamed(context, 'place_detail')),
+      title: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Container(
+          color: Colors.grey[200],
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(20),
+          child: Column(children: [
+            Row(children: [
               Expanded(
                 child: Column(
                   children: [
-                    Row(
-                      children: const <Widget>[
-                        Icon(Icons.location_on),
-                        Text("Universidad de La Habana"),
-                        Spacer(),
-                        Text("9:50 AM"),
-                      ],
+                    Text(
+                      place.name,
+                      style: TextStyle(fontSize: 20),
                     ),
-                    Row(
-                      children: const <Widget>[
-                        Icon(Icons.more_vert),
-                      ],
-                    ),
-                    Row(
-                      children: const <Widget>[
-                        Icon(Icons.trip_origin),
-                        Text("Teatro Nacional"),
-                        Spacer(),
-                        Text("10:05 AM"),
-                      ],
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Text(
+                        place.address,
+                        style: TextStyle(fontSize: 13),
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
-          )
-        ]),
+              // Spacer(),
+
+              Spacer(),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: Column(
+                  children: <Widget>[
+                    Text("Lat:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold)), // grey small
+                    Text(place.latitude.toString()), //black big
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: Column(
+                  children: <Widget>[
+                    Text("Long:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold)), // grey small
+                    Text(place.longitude.toString()), //black big
+                  ],
+                ),
+              ),
+            ]),
+          ]),
+        ),
       ),
     );
   }
