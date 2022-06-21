@@ -1,35 +1,34 @@
+import 'dart:convert';
+
 import 'package:taxi_app/src/models/place.dart';
 import 'package:taxi_app/src/services/api_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 
 class PlaceProvider {
   final String baseUrl = "/places";
   final apiService = GetIt.I<ApiService>();
 
-  getAllPlaces() {
-    return [
-      Place(
-        name: 'Place 1',
-        address: "Address 1",
-        latitude: -34.927192,
-        longitude: -56.152912,
-      ),
-      Place(
-        name: 'Place 2',
-        address: "Address 2",
-        latitude: -34.927192,
-        longitude: -56.152912,
-      ),
-      Place(
-        name: 'Place 3',
-        address: "Address 3",
-        latitude: -34.927192,
-        longitude: -56.152912,
-      ),
-    ];
+  Future<List<Place>> getAllPlaces() async {
+    String uri = 'http://194.36.189.148:8000/place/';
+    final response = await http.get(Uri.parse(uri));
+    if (response.statusCode == 200) {
+      Iterable l = json.decode(response.body);
+      List<Place> places =
+          List<Place>.from(l.map((model) => Place.fromJson(model)));
+    }
+
+    throw Exception('Failed to load data');
   }
 
-  getPlace() {}
+  getPlace(int id) async {
+    String uri = 'http://194.36.189.148:8000/place/' + id.toString();
+    final response = await http.get(Uri.parse(uri));
+    if (response.statusCode == 200) {
+      return Place.fromJson(json.decode(response.body));
+    }
+    throw Exception('Failed to load data');
+  }
 
   getPlaceByName() {}
 

@@ -3,19 +3,19 @@ import 'package:json_annotation/json_annotation.dart';
 part 'driver_model.g.dart';
 
 @JsonSerializable()
-class DriverModel {
+class Driver {
   String ci;
   String name;
   String phoneNumber;
   String password;
 
-  DriverModel(
+  Driver(
       {required this.ci,
       required this.name,
       required this.phoneNumber,
       required this.password});
 
-  factory DriverModel.fromJson(Map<String, dynamic> json) => _$DriverModelFromJson(json);
+  factory Driver.fromJson(Map<String, dynamic> json) => _$DriverFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DriverModelToJson(this);
+  Map<String, dynamic> toJson() => _$DriverToJson(this);
 }

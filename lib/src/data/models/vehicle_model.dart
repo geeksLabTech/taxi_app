@@ -3,22 +3,21 @@ import 'package:json_annotation/json_annotation.dart';
 part 'vehicle_model.g.dart';
 
 @JsonSerializable()
-class VehicleModel {
+class Vehicle {
   String name;
   String color;
   String licensePlate;
   String model;
 
-  VehicleModel({
+  Vehicle({
     required this.name,
     required this.color,
     required this.licensePlate,
     required this.model,
   });
 
-  factory VehicleModel.fromJson(Map<String, dynamic> json) =>
-      _$VehicleModelFromJson(json);
+  factory Vehicle.fromJson(Map<String, dynamic> json) =>
+      _$VehicleFromJson(json);
 
-  Map<String, dynamic> toJson() => _$VehicleModelToJson(this);
-
+  Map<String, dynamic> toJson() => _$VehicleToJson(this);
 }

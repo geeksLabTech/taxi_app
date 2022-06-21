@@ -6,7 +6,7 @@ part of 'trip_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TripModel _$TripModelFromJson(Map<String, dynamic> json) => TripModel(
+Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
       date: json['date'] as String,
       time: json['time'] as String,
       distance: (json['distance'] as num).toDouble(),
@@ -18,7 +18,7 @@ TripModel _$TripModelFromJson(Map<String, dynamic> json) => TripModel(
       destinationId: json['destinationId'] as int,
     );
 
-Map<String, dynamic> _$TripModelToJson(TripModel instance) => <String, dynamic>{
+Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'date': instance.date,
       'time': instance.time,
       'distance': instance.distance,

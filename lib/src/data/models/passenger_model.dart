@@ -1,20 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'passenger_model.g.dart';
 
-
 @JsonSerializable()
-class PassengerModel {
+class Passenger {
   String name;
   String phoneNumber;
   String password;
 
-  PassengerModel(
+  Passenger(
       {required this.name, required this.phoneNumber, required this.password});
 
-  factory PassengerModel.fromJson(Map<String, dynamic> json) =>
-      _$PassengerModelFromJson(json);
+  factory Passenger.fromJson(Map<String, dynamic> json) =>
+      _$PassengerFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PassengerModelToJson(this);
+  Map<String, dynamic> toJson() => _$PassengerToJson(this);
 }
