@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:taxi_app/src/data/providers/remote/place_provider.dart';
 import 'package:taxi_app/src/models/place.dart';
+import 'package:taxi_app/src/widgets/blue_button.dart';
 import 'package:taxi_app/src/widgets/text_field_widget.dart';
 
 class AddEditPlacePage extends StatelessWidget {
-  final Place? place;
-
-  const AddEditPlacePage({Key? key, this.place = null}) : super(key: key);
+  const AddEditPlacePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+    final place = arguments['Place'] as Place;
     Place originalPlace;
+
+    final placeProvider = GetIt.I<PlaceProvider>();
 
     if (place != null) {
       originalPlace = Place(
-        name: place!.name,
-        address: place!.address,
-        latitude: place!.latitude,
-        longitude: place!.longitude,
+        name: place.name,
+        address: place.address,
+        latitude: place.latitude,
+        longitude: place.longitude,
       );
     } else {
       originalPlace = Place(
@@ -41,35 +47,48 @@ class AddEditPlacePage extends StatelessWidget {
       ),
       body:
           // text inputs for name, address, latitude, longitude
-          Container(
-              child: Column(
-        children: <Widget>[
-          TextFieldWidget(
-              label: "Name",
-              text: place!.name,
-              onChanged: (str) => {
-                    place!.name = str,
-                  }),
-          TextFieldWidget(
-              label: "Address",
-              text: place!.address,
-              onChanged: (str) => {
-                    place!.address = str,
-                  }),
-          TextFieldWidget(
-              label: "Latitude",
-              text: place!.latitude.toString(),
-              onChanged: (str) => {
-                    place!.latitude = double.parse(str),
-                  }),
-          TextFieldWidget(
-              label: "Longitude",
-              text: place!.longitude.toString(),
-              onChanged: (str) => {
-                    place!.longitude = double.parse(str),
-                  }),
-        ],
-      )),
+          Center(
+        child: Container(
+            margin: EdgeInsets.all(20),
+            width: MediaQuery.of(context).size.width / 2,
+            child: Column(
+              children: <Widget>[
+                TextFieldWidget(
+                    label: "Name",
+                    text: originalPlace.name == null ? " " : originalPlace.name,
+                    onChanged: (str) => {
+                          originalPlace.name = str,
+                        }),
+                TextFieldWidget(
+                    label: "Address",
+                    text: originalPlace.address,
+                    onChanged: (str) => {
+                          originalPlace.address = str,
+                        }),
+                TextFieldWidget(
+                    label: "Latitude",
+                    text: originalPlace.latitude.toString(),
+                    onChanged: (str) => {
+                          originalPlace.latitude = double.parse(str),
+                        }),
+                TextFieldWidget(
+                    label: "Longitude",
+                    text: originalPlace.longitude.toString(),
+                    onChanged: (str) => {
+                          originalPlace.longitude = double.parse(str),
+                        }),
+                BlueButton(
+                    text: "Save Place",
+                    onPressed: () async {
+                      if (place != null) {
+                        await placeProvider.updatePlace(originalPlace);
+                      } else {
+                        await placeProvider.createPlace(originalPlace);
+                      }
+                    }),
+              ],
+            )),
+      ),
     );
   }
 }

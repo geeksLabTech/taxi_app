@@ -8,7 +8,8 @@ class PlaceTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: (() => Navigator.pushNamed(context, 'place_detail')),
+      onTap: (() => Navigator.pushNamed(context, 'detail_place',
+          arguments: {'Place': place})),
       title: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Container(

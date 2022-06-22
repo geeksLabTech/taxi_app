@@ -21,5 +21,6 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'profile': (_) => ProfilePage(),
   'history': (_) => HistoryPage(),
   'places': (_) => PersonalPlacesPage(),
-  'place_detail': (_) => AddEditPlacePage(),
+  'add_place': (_) => AddEditPlacePage(),
+  'detail_place': (_) => AddEditPlacePage(),
 };

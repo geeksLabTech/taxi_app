@@ -38,9 +38,11 @@ class PlaceProvider {
 
   getPlaceByName() {}
 
-  createPlace() {}
+  createPlace(Place place) {
+    print(jsonEncode(place));
+  }
 
-  updatePlaces() {}
+  updatePlace(Place place) {}
 
   deletePlace() {}
 }
