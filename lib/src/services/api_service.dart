@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 
 enum Method { POST, GET, PUT, DELETE, PATCH }
 
-const BASE_URL = "https://fakestoreapi.com/";
+const BASE_URL = "http://194.36.189.148:8000";
 
 class ApiService {
   Dio? _dio;
