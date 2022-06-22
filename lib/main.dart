@@ -3,9 +3,10 @@ import 'package:taxi_app/src/pages/login_page.dart';
 import 'package:taxi_app/src/routes/routes.dart';
 import 'package:taxi_app/src/services/services.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Services services = Services();
-  services.init();
+  await services.init();
   runApp(const MyApp());
 }
 

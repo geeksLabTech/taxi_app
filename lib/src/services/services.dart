@@ -7,8 +7,8 @@ import 'api_service.dart';
 
 class Services {
   GetIt getIt = GetIt.instance;
-  void init() {
-    getIt.registerSingleton<ApiService>(ApiService());
+  Future<void> init() async {
+    getIt.registerSingleton<ApiService>(await ApiService().init());
     getIt.registerSingleton<PassengerProvider>(PassengerProvider());
     getIt.registerSingleton<PlaceProvider>(PlaceProvider());
     getIt.registerSingleton<TripProvider>(TripProvider());
