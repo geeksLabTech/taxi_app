@@ -7,6 +7,7 @@ part of 'vehicle_model.dart';
 // **************************************************************************
 
 Vehicle _$VehicleFromJson(Map<String, dynamic> json) => Vehicle(
+      id: json['id'] as int,
       name: json['name'] as String,
       color: json['color'] as String,
       licensePlate: json['licensePlate'] as String,
@@ -14,6 +15,7 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) => Vehicle(
     );
 
 Map<String, dynamic> _$VehicleToJson(Vehicle instance) => <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'color': instance.color,
       'licensePlate': instance.licensePlate,

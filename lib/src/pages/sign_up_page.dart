@@ -74,7 +74,11 @@ class __FormState extends State<_Form> {
             textController: passCtrl,
             isPassword: true,
           ),
-          BlueButton(text: 'Registrar', onPressed: () {})
+          BlueButton(
+              text: 'Registrar',
+              onPress: () {
+                Navigator.pushReplacementNamed(context, 'home');
+              })
         ],
       ),
     );

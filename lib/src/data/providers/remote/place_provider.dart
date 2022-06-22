@@ -42,7 +42,9 @@ class PlaceProvider {
     print(jsonEncode(place));
   }
 
-  updatePlace(Place place) {}
+  updatePlace(Place place) {
+    print(jsonEncode(place));
+  }
 
   deletePlace() {}
 }

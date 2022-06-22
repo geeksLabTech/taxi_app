@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class BlueButton extends StatelessWidget {
   final String text;
-  final Function onPressed;
+  final Function onPress;
 
-  const BlueButton({Key? key, required this.text, required this.onPressed})
+  const BlueButton({Key? key, required this.text, required this.onPress})
       : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class BlueButton extends StatelessWidget {
         shape: MaterialStateProperty.all(StadiumBorder()),
       ),
       onPressed: () {
-        Navigator.pushReplacementNamed(context, 'home');
+        onPress();
       },
       child: Container(
         width: double.infinity,

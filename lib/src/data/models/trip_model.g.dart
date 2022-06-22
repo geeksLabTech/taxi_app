@@ -7,6 +7,7 @@ part of 'trip_model.dart';
 // **************************************************************************
 
 Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
+      id: json['id'] as int,
       date: json['date'] as String,
       time: json['time'] as String,
       distance: (json['distance'] as num).toDouble(),
@@ -19,6 +20,7 @@ Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
     );
 
 Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
+      'id': instance.id,
       'date': instance.date,
       'time': instance.time,
       'distance': instance.distance,

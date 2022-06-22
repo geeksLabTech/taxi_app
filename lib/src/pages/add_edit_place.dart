@@ -10,9 +10,12 @@ class AddEditPlacePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Place? place;
     final arguments = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
-    final place = arguments['Place'] as Place;
+
+    if (arguments['Place'] != null) place = arguments['Place'] as Place;
+
     Place originalPlace;
 
     final placeProvider = GetIt.I<PlaceProvider>();
@@ -79,12 +82,14 @@ class AddEditPlacePage extends StatelessWidget {
                         }),
                 BlueButton(
                     text: "Save Place",
-                    onPressed: () async {
+                    onPress: () async {
+                      print("saving place");
                       if (place != null) {
                         await placeProvider.updatePlace(originalPlace);
                       } else {
                         await placeProvider.createPlace(originalPlace);
                       }
+                      Navigator.pop(context);
                     }),
               ],
             )),

@@ -68,7 +68,11 @@ class __FormState extends State<_Form> {
             textController: passCtrl,
             isPassword: true,
           ),
-          BlueButton(text: 'Ingrese', onPressed: () {})
+          BlueButton(
+              text: 'Ingrese',
+              onPress: () {
+                Navigator.pushReplacementNamed(context, 'home');
+              })
         ],
       ),
     );

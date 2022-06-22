@@ -4,12 +4,14 @@ part 'vehicle_model.g.dart';
 
 @JsonSerializable()
 class Vehicle {
+  int id;
   String name;
   String color;
   String licensePlate;
   String model;
 
   Vehicle({
+    required this.id,
     required this.name,
     required this.color,
     required this.licensePlate,

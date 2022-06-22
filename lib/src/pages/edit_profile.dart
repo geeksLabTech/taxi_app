@@ -52,7 +52,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             const SizedBox(height: 24),
             BlueButton(
                 text: "save",
-                onPressed: () {
+                onPress: () {
                   Navigator.pop(context);
                 })
           ],

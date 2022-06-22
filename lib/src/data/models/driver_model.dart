@@ -4,13 +4,15 @@ part 'driver_model.g.dart';
 
 @JsonSerializable()
 class Driver {
+  int id;
   String ci;
   String name;
   String phoneNumber;
   String password;
 
   Driver(
-      {required this.ci,
+      {required this.id,
+      required this.ci,
       required this.name,
       required this.phoneNumber,
       required this.password});

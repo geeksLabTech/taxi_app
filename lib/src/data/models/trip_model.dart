@@ -4,6 +4,7 @@ part 'trip_model.g.dart';
 
 @JsonSerializable()
 class Trip {
+  int id;
   String date;
   String time;
   double distance;
@@ -15,7 +16,8 @@ class Trip {
   int destinationId;
 
   Trip(
-      {required this.date,
+      {required this.id,
+      required this.date,
       required this.time,
       required this.distance,
       required this.price,

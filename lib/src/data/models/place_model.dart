@@ -4,12 +4,14 @@ part 'place_model.g.dart';
 
 @JsonSerializable()
 class Place {
+  int id;
   String name;
   String address;
   double latitude;
   double longitude;
 
   Place({
+    required this.id,
     required this.name,
     required this.address,
     required this.latitude,
