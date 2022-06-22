@@ -1,49 +1,54 @@
+import 'package:dio/dio.dart';
 import 'package:taxi_app/src/data/models/trip_model.dart';
 import 'package:taxi_app/src/services/api_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path/path.dart' as p;
 
 class TripProvider {
-  final baseUrl = 'http://194.36.189.148:8000/trip';
+  final baseUrl = '/trip/';
   final apiService = GetIt.I<ApiService>();
 
-  getAllTrips() async {
-    var response = await apiService.request(
+  Future<List<Trip>> getAllTrips() async {
+    Response response = await apiService.request(
       method: Method.GET,
       url: baseUrl,
     );
     List<Trip> trips = [];
-    for (Map<String, dynamic> trip in response) {
+    for (Map<String, dynamic> trip in response.data) {
       trips.add(Trip.fromJson(trip));
     }
     return trips;
   }
 
-  getAllTripsFiltered(String filter) async {
-    var response = await apiService.request(method: Method.GET, url: baseUrl);
+  Future<List<Trip>> getAllTripsFiltered(String filter) async {
+    Response response =
+        await apiService.request(method: Method.GET, url: baseUrl);
     List<Trip> trips = [];
-    for (Map<String, dynamic> trip in response) {
-      final trp = Trip.fromJson(trip);
-      if (trp.status == filter) {
-        trips.add(trp);
+    for (Map<String, dynamic> trip in response.data) {
+      if (trip['status'] == filter) {
+        trips.add(Trip.fromJson(trip));
       }
+
     }
+    return trips;
   }
 
   getTrip() {}
 
-  createTrip(Trip trip) async {
-    return await apiService.request(
+  Future<Trip> createTrip(Trip trip) async {
+    final serializedTrip = trip.toJson();
+    final Response response = await apiService.request(
       method: Method.POST,
       url: baseUrl,
-      params: trip.toJson(),
+      params: serializedTrip,
     );
+    return Trip.fromJson(response.data);
+    
   }
 
-  deleteTrip(String id) async {
-    return await apiService.request(
-      method: Method.DELETE,
-      url: p.join(baseUrl, id),
-    );
+  Future<Trip> deleteTrip(String id) async {
+    final Response response =
+        await apiService.request(method: Method.DELETE, url: '$baseUrl/$id');
+    return Trip.fromJson(response.data);
   }
 }
