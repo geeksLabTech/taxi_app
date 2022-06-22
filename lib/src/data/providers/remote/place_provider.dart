@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:taxi_app/src/models/place.dart';
+import 'package:taxi_app/src/data/models/place_model.dart';
 import 'package:taxi_app/src/services/api_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +16,7 @@ class PlaceProvider {
       Iterable l = json.decode(response.body);
       final places = List<Place>.from(l.map((model) {
         return Place(
+            id: model['id'],
             address: model['address'],
             name: model['name'],
             latitude: model['latitude'],
@@ -36,15 +37,40 @@ class PlaceProvider {
     throw Exception('Failed to load data');
   }
 
-  getPlaceByName() {}
-
-  createPlace(Place place) {
-    print(jsonEncode(place));
+  getPlaceByName(String name) async {
+    String uri = 'http://194.36.189.148:8000/place/name/' + name;
+    final response = await http.get(Uri.parse(uri));
+    if (response.statusCode == 200) {
+      return Place.fromJson(json.decode(response.body));
+    }
   }
 
-  updatePlace(Place place) {
-    print(jsonEncode(place));
+  createPlace(Place place) async {
+    String uri = 'http://194.36.189.148:8000/place/';
+    final serializedPlace = jsonEncode(place);
+    final response = await http.post(Uri.parse(uri), body: serializedPlace);
+    if (response.statusCode == 200) {
+      return Place.fromJson(json.decode(response.body));
+    }
+    throw Exception('Failed to load data');
   }
 
-  deletePlace() {}
+  updatePlace(Place place) async {
+    String uri = 'http://194.36.189.148:8000/place/' + place.id.toString();
+    final serializedPlace = jsonEncode(place);
+    final response = await http.put(Uri.parse(uri), body: serializedPlace);
+    if (response.statusCode == 200) {
+      return Place.fromJson(json.decode(response.body));
+    }
+    throw Exception('Failed to load data');
+  }
+
+  deletePlace(String id) async {
+    String uri = 'http://194.36.189.148:8000/place/' + id;
+    final response = await http.delete(Uri.parse(uri));
+    if (response.statusCode == 200) {
+      return true;
+    }
+    throw Exception('Failed to load data');
+  }
 }

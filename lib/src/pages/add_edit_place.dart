@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:taxi_app/src/data/providers/remote/place_provider.dart';
-import 'package:taxi_app/src/models/place.dart';
 import 'package:taxi_app/src/widgets/blue_button.dart';
 import 'package:taxi_app/src/widgets/text_field_widget.dart';
+
+import '../data/models/place_model.dart';
 
 class AddEditPlacePage extends StatelessWidget {
   const AddEditPlacePage({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class AddEditPlacePage extends StatelessWidget {
 
     if (place != null) {
       originalPlace = Place(
+        id: place.id,
         name: place.name,
         address: place.address,
         latitude: place.latitude,
@@ -29,6 +31,7 @@ class AddEditPlacePage extends StatelessWidget {
       );
     } else {
       originalPlace = Place(
+        id: 0,
         name: '',
         address: '',
         latitude: 0,
