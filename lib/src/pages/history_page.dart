@@ -45,7 +45,7 @@ class _HistoryPageState extends State<HistoryPage> {
       body: Container(
         child: Column(
           children: [
-            TripFilterWidget(labels[labelIndex]),
+            tripFilterWidget(labels[labelIndex]),
           ],
         ),
       ),
@@ -54,17 +54,34 @@ class _HistoryPageState extends State<HistoryPage> {
 
   Widget tripsData(String filter) {
     final tripProvider = GetIt.I<TripProvider>();
-    final List<Trip> history = tripProvider.getAllTripsFiltered(filter);
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: history.length,
-      itemBuilder: (context, index) {
-        return TripTileWidget(trip: history[index]);
-      },
+    return FutureBuilder(
+      future: tripProvider.getAllTripsFiltered(filter),
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: snapshot.data?.length,
+            itemBuilder: (context, index) {
+              return TripTileWidget(trip: snapshot.data?[index]);
+            },
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
     );
+    // return ListView.builder(
+    //   shrinkWrap: true,
+    //   itemCount: history.length,
+    //   itemBuilder: (context, index) {
+    //     return TripTileWidget(trip: history[index]);
+    //   },
+    // );
   }
 
-  TripFilterWidget(String filter) {
+  Widget tripFilterWidget(String filter) {
     return Column(
       children: [tripsData(filter)],
     );
