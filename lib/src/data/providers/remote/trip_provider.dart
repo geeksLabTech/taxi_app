@@ -1,68 +1,49 @@
-import 'package:taxi_app/src/models/trip.dart';
+import 'package:taxi_app/src/data/models/trip_model.dart';
 import 'package:taxi_app/src/services/api_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:path/path.dart' as p;
 
 class TripProvider {
-  final baseUrl = '/trip';
+  final baseUrl = 'http://194.36.189.148:8000/trip';
   final apiService = GetIt.I<ApiService>();
 
-  getAllTrips() {
-    return [
-      const Trip(
-        date: '2020-01-01',
-        time: '12:00',
-        distance: 10.0,
-        price: 10.0,
-        driverId: 1,
-        passengerId: 1,
-        status: 'completed',
-        originId: 1,
-        destinationId: 1,
-      ),
-      const Trip(
-        date: '2020-01-01',
-        time: '12:30',
-        distance: 10.0,
-        price: 10.0,
-        driverId: 2,
-        passengerId: 2,
-        status: 'completed',
-        originId: 2,
-        destinationId: 3,
-      ),
-    ];
+  getAllTrips() async {
+    var response = await apiService.request(
+      method: Method.GET,
+      url: baseUrl,
+    );
+    List<Trip> trips = [];
+    for (Map<String, dynamic> trip in response) {
+      trips.add(Trip.fromJson(trip));
+    }
+    return trips;
   }
 
-  getAllTripsFiltered(String filter) {
-    return [
-      const Trip(
-        date: '2020-01-01',
-        time: '12:00',
-        distance: 10.0,
-        price: 10.0,
-        driverId: 1,
-        passengerId: 1,
-        status: 'completed',
-        originId: 1,
-        destinationId: 1,
-      ),
-      const Trip(
-        date: '2020-01-01',
-        time: '12:30',
-        distance: 10.0,
-        price: 10.0,
-        driverId: 2,
-        passengerId: 2,
-        status: 'completed',
-        originId: 2,
-        destinationId: 3,
-      ),
-    ];
+  getAllTripsFiltered(String filter) async {
+    var response = await apiService.request(method: Method.GET, url: baseUrl);
+    List<Trip> trips = [];
+    for (Map<String, dynamic> trip in response) {
+      final trp = Trip.fromJson(trip);
+      if (trp.status == filter) {
+        trips.add(trp);
+      }
+    }
   }
 
   getTrip() {}
 
-  createTrip() {}
+  createTrip(Trip trip) async {
+    return await apiService.request(
+      method: Method.POST,
+      url: baseUrl,
+      params: trip.toJson(),
+    );
+  }
 
-  deleteTrip() {}
+  deleteTrip(String id) async {
+    return await apiService.request(
+      method: Method.DELETE,
+      url: p.join(baseUrl, id),
+    );
+  }
 }
