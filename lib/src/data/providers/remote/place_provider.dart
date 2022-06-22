@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:taxi_app/src/data/models/place_model.dart';
 import 'package:taxi_app/src/services/api_service.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 
 class PlaceProvider {
   final String baseUrl = "/place/";
@@ -20,37 +17,40 @@ class PlaceProvider {
     return places;
   }
 
-  getPlace(int id) async {
+  Future<Place> getPlace(int id) async {
     final Response response =
-        await apiService.request(url: '$baseUrl/$id', method: Method.GET);
+        await apiService.request(url: '$baseUrl$id', method: Method.GET);
     return Place.fromJson(response.data);
   }
 
-  getPlaceByName(String name) async {
+  Future<Place> getPlaceByName(String name) async {
     final Response response = await apiService.request(
-        url: '$baseUrl/name/$name', method: Method.GET);
+        url: '${baseUrl}name/$name', method: Method.GET);
     return Place.fromJson(response.data);
   }
 
-  createPlace(Place place) async {
+  Future<Place> createPlace(Place place) async {
     final serializedPlace = place.toJson();
     final Response response = await apiService.request(
         url: baseUrl, method: Method.POST, params: serializedPlace);
     return Place.fromJson(response.data);
   }
 
-  updatePlace(Place place) async {
+  Future<Place> updatePlace(Place place) async {
     final serializedPlace = place.toJson();
+    print("serializedPlace: $serializedPlace");
+    print("id: ${place.id}");
     final Response response = await apiService.request(
-        url: '$baseUrl/${place.id}',
+        url: '$baseUrl${place.id}',
         method: Method.PUT,
         params: serializedPlace);
+    print("SHOW RETURNED EDIT PLACE: ${response.data}");
     return Place.fromJson(response.data);
   }
 
-  deletePlace(String id) async {
+  Future<Place> deletePlace(String id) async {
     final Response response =
-        await apiService.request(url: '$baseUrl/$id', method: Method.DELETE);
+        await apiService.request(url: '$baseUrl$id', method: Method.DELETE);
     return Place.fromJson(response.data);
   }
 }
