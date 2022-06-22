@@ -16,6 +16,8 @@ class AddEditPlacePage extends StatelessWidget {
         <String, dynamic>{}) as Map;
 
     if (arguments['Place'] != null) place = arguments['Place'] as Place;
+    print("mira el place !!!!!!!!");
+    print(place?.name);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -38,7 +40,7 @@ class AddEditPlacePage extends StatelessWidget {
 }
 
 class _Form extends StatefulWidget {
-  Place? place;
+  bool isEditing = false;
   Place originalPlace = Place(
     id: 0,
     name: '',
@@ -49,6 +51,7 @@ class _Form extends StatefulWidget {
 
   _Form({Key? key, Place? place}) : super(key: key) {
     if (place != null) {
+      isEditing = true;
       originalPlace = Place(
         id: place.id,
         name: place.name,
@@ -69,6 +72,7 @@ class __FormState extends State<_Form> {
   final latitudeController = TextEditingController();
   final longitudeController = TextEditingController();
   final placeProvider = GetIt.I<PlaceProvider>();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -76,25 +80,33 @@ class __FormState extends State<_Form> {
         CustomInputWidget(
           icon: Icons.person,
           textController: nameController,
-          placeholder: 'Name',
+          placeholder: widget.originalPlace.name == ''
+              ? 'Name'
+              : widget.originalPlace.name,
           keyboardType: TextInputType.text,
         ),
         CustomInputWidget(
           icon: Icons.home,
           textController: adressController,
-          placeholder: 'Address',
+          placeholder: widget.originalPlace.address == ''
+              ? 'Address'
+              : widget.originalPlace.address,
           keyboardType: TextInputType.text,
         ),
         CustomInputWidget(
           icon: Icons.location_on,
           textController: latitudeController,
-          placeholder: 'Latitude',
+          placeholder: widget.originalPlace.latitude == 0
+              ? '0.0'
+              : widget.originalPlace.latitude.toString(),
           keyboardType: TextInputType.number,
         ),
         CustomInputWidget(
             icon: Icons.location_on,
             textController: longitudeController,
-            placeholder: 'Longitude',
+            placeholder: widget.originalPlace.longitude == 0
+                ? '0.0'
+                : widget.originalPlace.longitude.toString(),
             keyboardType: TextInputType.number),
         BlueButton(
             text: "Save Place",
@@ -106,7 +118,9 @@ class __FormState extends State<_Form> {
                   double.parse(latitudeController.text);
               widget.originalPlace.longitude =
                   double.parse(longitudeController.text);
-              if (widget.place != null) {
+              if (widget.isEditing) {
+                print("*************************************");
+                print(widget.originalPlace.name);
                 await placeProvider.updatePlace(widget.originalPlace);
               } else {
                 await placeProvider.createPlace(widget.originalPlace);
