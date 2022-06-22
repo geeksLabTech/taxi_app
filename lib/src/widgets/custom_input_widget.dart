@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomInput extends StatelessWidget {
+class CustomInputWidget extends StatelessWidget {
 
   final IconData icon;
   final String placeholder;
@@ -8,7 +8,7 @@ class CustomInput extends StatelessWidget {
   final TextInputType keyboardType;
   final bool isPassword;
 
-  const CustomInput({
+  const CustomInputWidget({
     Key? key, 
     required this.icon, 
     required this.placeholder, 

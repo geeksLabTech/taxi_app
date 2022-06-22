@@ -56,13 +56,13 @@ class __FormState extends State<_Form> {
       padding: EdgeInsets.symmetric(horizontal: 50),
       child: Column(
         children: <Widget>[
-          CustomInput(
+          CustomInputWidget(
             icon: Icons.phone,
             placeholder: 'Teléfono',
             keyboardType: TextInputType.phone,
             textController: emailCtrl,
           ),
-          CustomInput(
+          CustomInputWidget(
             icon: Icons.lock_outline,
             placeholder: 'Contraseña',
             textController: passCtrl,
