@@ -36,6 +36,7 @@ dependencies:
   toggle_switch: ^2.0.1
   http: ^0.13.4
   path: ^1.8.1
+  awesome_dialog: ^2.2.1
 
   #flutter_secure_storage: ^5.0.2
   # The following adds the Cupertino Icons font to your application.

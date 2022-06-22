@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_app/src/data/models/place_model.dart';
-
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:taxi_app/src/data/providers/remote/place_provider.dart';
+import 'package:get_it/get_it.dart';
 class PlaceTileWidget extends StatelessWidget {
   final Place place;
   const PlaceTileWidget({Key? key, required this.place}) : super(key: key);
@@ -8,8 +10,6 @@ class PlaceTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: (() => Navigator.pushNamed(context, 'detail_place',
-          arguments: {'Place': place})),
       title: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Container(
@@ -66,4 +66,6 @@ class PlaceTileWidget extends StatelessWidget {
       ),
     );
   }
+
+  
 }

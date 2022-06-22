@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:taxi_app/src/data/models/place_model.dart';
@@ -43,7 +44,12 @@ class _PersonalPlacesPageState extends State<PersonalPlacesPage> {
             shrinkWrap: true,
             itemCount: snapshot.data?.length,
             itemBuilder: (context, index) {
-              return PlaceTileWidget(place: snapshot.data?[index]);
+              return InkWell(
+                  onLongPress: () =>
+                      _showRemoveDialog(context, snapshot.data?[index]),
+                  onTap: (() => Navigator.pushNamed(context, 'detail_place',
+                      arguments: {'Place': snapshot.data?[index]})),
+                  child: PlaceTileWidget(place: snapshot.data?[index]));
             },
           );
         }
@@ -52,5 +58,23 @@ class _PersonalPlacesPageState extends State<PersonalPlacesPage> {
         );
       },
     );
+  }
+
+  _showRemoveDialog(BuildContext context, Place e) {
+    final PlaceProvider placeProvider = GetIt.I<PlaceProvider>();
+    AwesomeDialog(
+        context: context,
+        dialogType: DialogType.WARNING,
+        animType: AnimType.BOTTOMSLIDE,
+        dismissOnTouchOutside: false,
+        body: Center(
+          child: Text('¿Está seguro que desea eliminar este Lugar?'),
+        ),
+        btnCancelOnPress: () {},
+        btnOkOnPress: () async {
+          await placeProvider.deletePlace(e.id.toString());
+          setState(() {});
+        })
+      ..show();
   }
 }
