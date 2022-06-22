@@ -26,15 +26,39 @@ class PassengerProvider {
     return Passenger.fromJson(response);
   }
 
-  getPassengerByPhoneNumber() {}
+  getPassengerByPhoneNumber(String phoneNumber) async {
+    var response = await apiService.request(
+        url: p.join(baseUrl, "phone_number", phoneNumber), method: Method.GET);
+    return Passenger.fromJson(response);
+  }
 
-  loginPassenger() {}
+  loginPassenger(String phoneNumber, String password) async {
+    var response = await apiService.request(
+        url: p.join(baseUrl, "login"),
+        method: Method.POST,
+        params: {"phone_number": phoneNumber, "password": password});
+    return Passenger.fromJson(response);
+  }
 
-  currentPassenger() {}
+  currentPassenger() async {}
 
-  createPassenger() {}
+  createPassenger(Passenger passenger) async {
+    var response = await apiService.request(
+        url: baseUrl, method: Method.POST, params: passenger.toJson());
+    return Passenger.fromJson(response);
+  }
 
-  updatePassenger() {}
+  updatePassenger(Passenger passenger) async {
+    var response = await apiService.request(
+        url: p.join(baseUrl, passenger.id.toString()),
+        method: Method.PUT,
+        params: passenger.toJson());
+    return Passenger.fromJson(response);
+  }
 
-  deletePassenger() {}
+  deletePassenger(int id) async {
+    var response = await apiService.request(
+        url: p.join(baseUrl, id.toString()), method: Method.DELETE);
+    return Passenger.fromJson(response);
+  }
 }
