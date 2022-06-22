@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:taxi_app/src/data/providers/remote/passenger_provider.dart';
-import 'package:taxi_app/src/models/passenger.dart';
 import 'package:taxi_app/src/widgets/blue_button.dart';
 import 'package:taxi_app/src/widgets/profile_photo.dart';
 import 'package:taxi_app/src/widgets/text_field_widget.dart';

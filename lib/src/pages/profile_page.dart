@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:taxi_app/src/data/models/passenger_model.dart';
 import 'package:taxi_app/src/data/providers/remote/passenger_provider.dart';
-import 'package:taxi_app/src/models/passenger.dart';
 import 'package:taxi_app/src/pages/edit_profile.dart';
 import 'package:taxi_app/src/widgets/passenger_stats.dart';
 import 'package:taxi_app/src/widgets/profile_photo.dart';
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 16),
             Text(
-              user.about,
+              "texto sobre el user q ya no tenemos, no se q poner aqui",
               style: TextStyle(fontSize: 16, height: 1.4),
             ),
           ],

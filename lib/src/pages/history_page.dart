@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:taxi_app/src/models/trip.dart';
+import 'package:taxi_app/src/data/models/trip_model.dart';
 import 'package:taxi_app/src/widgets/trip_tile_widget.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 

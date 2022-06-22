@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_app/src/models/place.dart';
+import 'package:taxi_app/src/data/models/place_model.dart';
 
 class PlaceTileWidget extends StatelessWidget {
   final Place place;

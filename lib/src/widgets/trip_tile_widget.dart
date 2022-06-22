@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_app/src/models/trip.dart';
+import 'package:taxi_app/src/data/models/trip_model.dart';
 
 class TripTileWidget extends StatelessWidget {
   final Trip trip;
