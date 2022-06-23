@@ -84,6 +84,13 @@ class homeDrawer extends StatelessWidget {
               Navigator.pushNamed(context, 'profile');
             },
           ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app, color: Colors.blue[800]),
+            title: Text('Logout', style: drawerListTileStyleText),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'login');
+            },
+          ),
         ],
       ),
     );
