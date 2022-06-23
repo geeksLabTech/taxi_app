@@ -6,13 +6,13 @@ part 'passenger_model.g.dart';
 class Passenger {
   int id;
   String name;
-  String phoneNumber;
+  String phone_number;
   String password;
 
   Passenger(
       {required this.id,
       required this.name,
-      required this.phoneNumber,
+      required this.phone_number,
       required this.password});
 
   factory Passenger.fromJson(Map<String, dynamic> json) =>
