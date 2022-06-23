@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_app/src/data/models/passenger_model.dart';
+import 'package:taxi_app/src/data/providers/remote/passenger_provider.dart';
 import 'package:taxi_app/src/widgets/blue_button.dart';
 
 import '../widgets/custom_input_widget.dart';
@@ -46,7 +48,8 @@ class _Form extends StatefulWidget {
 }
 
 class __FormState extends State<_Form> {
-  final emailCtrl = TextEditingController();
+  final phoneCtrl = TextEditingController();
+  final nameCtrl = TextEditingController();
   final passCtrl = TextEditingController();
 
   @override
@@ -60,13 +63,13 @@ class __FormState extends State<_Form> {
             icon: Icons.article_outlined,
             placeholder: 'Nombre',
             keyboardType: TextInputType.text,
-            textController: emailCtrl,
+            textController: nameCtrl,
           ),
           CustomInputWidget(
             icon: Icons.phone,
             placeholder: 'Teléfono',
             keyboardType: TextInputType.phone,
-            textController: emailCtrl,
+            textController: phoneCtrl,
           ),
           CustomInputWidget(
             icon: Icons.lock_outline,
@@ -77,10 +80,23 @@ class __FormState extends State<_Form> {
           BlueButton(
               text: 'Registrar',
               onPress: () {
+                Passenger passenger = Passenger(
+                    id: 0,
+                    name: nameCtrl.text,
+                    phoneNumber: phoneCtrl.text,
+                    password: passCtrl.text);
+                createPassenger(passenger);
+
                 Navigator.pushReplacementNamed(context, 'home');
               })
         ],
       ),
     );
+  }
+
+  void createPassenger(Passenger passenger) {
+    PassengerProvider passengerProvider = PassengerProvider();
+
+    passengerProvider.createPassenger(passenger);
   }
 }

@@ -13,7 +13,8 @@ class PassengerProvider {
 
   Future<List<Passenger>> getAllPassengers() async {
     List<Passenger> passengers = [];
-    Response response = await apiService.request(url: baseUrl, method: Method.GET);
+    Response response =
+        await apiService.request(url: baseUrl, method: Method.GET);
     for (Map<String, dynamic> passenger in response.data) {
       passengers.add(Passenger.fromJson(passenger));
     }
@@ -44,6 +45,7 @@ class PassengerProvider {
   currentPassenger() async {}
 
   Future<Passenger> createPassenger(Passenger passenger) async {
+    print(passenger.toJson());
     Response response = await apiService.request(
         url: baseUrl, method: Method.POST, params: passenger.toJson());
     return Passenger.fromJson(response.data);
