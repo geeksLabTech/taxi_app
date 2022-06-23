@@ -25,8 +25,15 @@ class _HistoryPageState extends State<HistoryPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Center(
-          child: ToggleSwitch(
+        title: const Center(
+          child: Text("Trips History"),
+        ),
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            SizedBox(height: 24),
+            ToggleSwitch(
             minWidth: MediaQuery.of(context).size.width / 3,
             initialLabelIndex: labelIndex,
             totalSwitches: 3,
@@ -40,14 +47,16 @@ class _HistoryPageState extends State<HistoryPage> {
               });
             },
           ),
-        ),
-      ),
-      body: Container(
-        child: Column(
-          children: [
             tripFilterWidget(labels[labelIndex]),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(  
+        onPressed: () {
+          Navigator.pushNamed(context, '/add_trip');
+        },
+        child: const Icon(Icons.add),
+        
       ),
     );
   }
