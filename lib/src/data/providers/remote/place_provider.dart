@@ -1,86 +1,56 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
 import 'package:taxi_app/src/data/models/place_model.dart';
 import 'package:taxi_app/src/services/api_service.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 
 class PlaceProvider {
-  final String baseUrl = "/places";
+  final String baseUrl = "/place/";
   final apiService = GetIt.I<ApiService>();
 
   Future<List<Place>> getAllPlaces() async {
-    String uri = 'http://194.36.189.148:8000/place/';
-    final response = await http.get(Uri.parse(uri));
-    if (response.statusCode == 200) {
-      Iterable l = json.decode(response.body);
-      final places = List<Place>.from(l.map((model) {
-        return Place(
-            id: model['id'],
-            address: model['address'],
-            name: model['name'],
-            latitude: model['latitude'],
-            longitude: model['longitude']);
-      }));
-      return places;
+    final Response response =
+        await apiService.request(url: baseUrl, method: Method.GET);
+    List<Place> places = [];
+    for (Map<String, dynamic> place in response.data) {
+      places.add(Place.fromJson(place));
     }
-
-    throw Exception('Failed to load data');
+    return places;
   }
 
-  getPlace(int id) async {
-    String uri = 'http://194.36.189.148:8000/place/' + id.toString();
-    final response = await http.get(Uri.parse(uri));
-    if (response.statusCode == 200) {
-      return Place.fromJson(json.decode(response.body));
-    }
-    throw Exception('Failed to load data');
+  Future<Place> getPlace(int id) async {
+    final Response response =
+        await apiService.request(url: '$baseUrl$id', method: Method.GET);
+    return Place.fromJson(response.data);
   }
 
-  getPlaceByName(String name) async {
-    String uri = 'http://194.36.189.148:8000/place/name/' + name;
-    final response = await http.get(Uri.parse(uri));
-    if (response.statusCode == 200) {
-      return Place.fromJson(json.decode(response.body));
-    }
+  Future<Place> getPlaceByName(String name) async {
+    final Response response = await apiService.request(
+        url: '${baseUrl}name/$name', method: Method.GET);
+    return Place.fromJson(response.data);
   }
 
-  createPlace(Place place) async {
-    String uri = 'http://194.36.189.148:8000/place/';
-    final serializedPlace = jsonEncode(place);
-    final response = await http.post(Uri.parse(uri), body: serializedPlace);
-    if (response.statusCode == 200) {
-      return Place.fromJson(json.decode(response.body));
-    }
-    throw Exception('Failed to load data');
+  Future<Place> createPlace(Place place) async {
+    final serializedPlace = place.toJson();
+    final Response response = await apiService.request(
+        url: baseUrl, method: Method.POST, params: serializedPlace);
+    return Place.fromJson(response.data);
   }
 
-  updatePlace(Place place) async {
-    String uri = 'http://194.36.189.148:8000/place/' +
-        place.id.toString() +
-        '?name=' +
-        place.name +
-        "&address=" +
-        place.address +
-        '&latitude=' +
-        place.latitude.toString() +
-        "&longitude=" +
-        place.longitude.toString();
-    // print(serializedPlace);
-    final response = await http.put(Uri.parse(uri));
-    print(uri);
-    if (response.statusCode == 200) {
-      return Place.fromJson(json.decode(response.body));
-    }
-    throw Exception('Failed to load data');
+  Future<Place> updatePlace(Place place) async {
+    final serializedPlace = place.toJson();
+    print("serializedPlace: $serializedPlace");
+    print("id: ${place.id}");
+    final Response response = await apiService.request(
+        url:
+            '$baseUrl${place.id}?name=${place.name}&address=${place.address}&latitude=${place.latitude.toString()}&longitude=${place.longitude.toString()}',
+        method: Method.PUT);
+    print("SHOW RETURNED EDIT PLACE: ${response.data}");
+    return Place.fromJson(response.data);
   }
 
-  deletePlace(String id) async {
-    String uri = 'http://194.36.189.148:8000/place/' + id;
-    final response = await http.delete(Uri.parse(uri));
-    if (response.statusCode == 200) {
-      return true;
-    }
-    throw Exception('Failed to load data');
+  Future<Place> deletePlace(String id) async {
+    final Response response =
+        await apiService.request(url: '$baseUrl$id', method: Method.DELETE);
+    return Place.fromJson(response.data);
   }
 }

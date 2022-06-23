@@ -55,7 +55,8 @@ class ApiService {
       } else if (method == Method.PATCH) {
         response = await _dio!.patch(url);
       } else if (method == Method.PUT) {
-        response = await _dio!.put(url, data: params);
+        print(url);
+        response = await _dio!.put(url);
       } else {
         response = await _dio!.get(url, queryParameters: params);
       }
