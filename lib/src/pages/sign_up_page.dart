@@ -83,7 +83,7 @@ class __FormState extends State<_Form> {
                 Passenger passenger = Passenger(
                     id: 0,
                     name: nameCtrl.text,
-                    phoneNumber: phoneCtrl.text,
+                    phone_number: phoneCtrl.text,
                     password: passCtrl.text);
                 createPassenger(passenger);
 
