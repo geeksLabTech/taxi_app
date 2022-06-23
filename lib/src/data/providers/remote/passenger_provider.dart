@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
+import 'package:taxi_app/src/data/models/login_passenger_model.dart';
 import 'package:taxi_app/src/data/models/passenger_model.dart';
 import 'package:taxi_app/src/services/api_service.dart';
 import 'package:get_it/get_it.dart';
@@ -34,12 +35,17 @@ class PassengerProvider {
     return Passenger.fromJson(response.data);
   }
 
-  Future<Passenger> loginPassenger(String phoneNumber, String password) async {
-    Response response = await apiService.request(
-        url: p.join(baseUrl, "login"),
-        method: Method.POST,
-        params: {"phone_number": phoneNumber, "password": password});
-    return Passenger.fromJson(response.data);
+  Future<LoginPassengerModel> loginPassenger(String phoneNumber, String password) async {
+    try {
+      Response response = await apiService.request(
+          url: p.join(baseUrl, "login"),
+          method: Method.POST,
+          params: {"phone_number": phoneNumber, "password": password});
+      print("response: ${response.data}");
+      return LoginPassengerModel.fromJson(response.data);
+    } catch (e) {
+      throw Exception('Login Error: $e');
+    }
   }
 
   currentPassenger() async {}

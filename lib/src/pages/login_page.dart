@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:taxi_app/src/data/providers/remote/passenger_provider.dart';
 import 'package:taxi_app/src/widgets/blue_button.dart';
 
 import '../widgets/custom_input_widget.dart';
@@ -48,6 +50,7 @@ class _Form extends StatefulWidget {
 class __FormState extends State<_Form> {
   final emailCtrl = TextEditingController();
   final passCtrl = TextEditingController();
+  final PassengerProvider _passengerProvider = GetIt.I<PassengerProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +73,16 @@ class __FormState extends State<_Form> {
           ),
           BlueButton(
               text: 'Ingrese',
-              onPress: () {
-                Navigator.pushReplacementNamed(context, 'home');
+              onPress: () async {
+                try {
+                  await _passengerProvider.loginPassenger(
+                      emailCtrl.text, passCtrl.text);
+                    Navigator.pushReplacementNamed(context, 'home');
+                } catch (e) {
+
+                  print(e);
+                }
+                
               })
         ],
       ),

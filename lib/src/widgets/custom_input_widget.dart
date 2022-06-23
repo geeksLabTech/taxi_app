@@ -18,7 +18,7 @@ class CustomInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    textController.text = placeholder;
+    // textController.text = placeholder;
     return Container(
       padding: const EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 20),
       margin: const EdgeInsets.only(bottom: 20),
