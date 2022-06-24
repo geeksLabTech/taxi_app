@@ -15,7 +15,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   int labelIndex = 0;
-  List<String> labels = ['Finished', 'In Progress', 'Cancelled'];
+  List<String> labels = ['REQUESTED', 'FINISHED', 'ACCEPTED', 'CANCELED'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class _HistoryPageState extends State<HistoryPage> {
             ToggleSwitch(
             minWidth: MediaQuery.of(context).size.width / 3,
             initialLabelIndex: labelIndex,
-            totalSwitches: 3,
+            totalSwitches: 4,
             labels: labels,
             onToggle: (index) {
               setState(() {
@@ -64,19 +64,24 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget tripsData(String filter) {
     final tripProvider = GetIt.I<TripProvider>();
     return FutureBuilder(
-      future: tripProvider.getAllTripsFiltered(filter),
+      future: tripProvider.getAllTrips(),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          print("snapshot ${snapshot.data}");
+          final trips = snapshot.data as List<Trip>;
+          final tripsFiltered = trips.where((trip) =>
+                  trip.status == filter).toList();
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: snapshot.data?.length,
+            itemCount: tripsFiltered.length,
             itemBuilder: (context, index) {
-              return TripTileWidget(trip: snapshot.data?[index]);
+              return TripTileWidget(trip: tripsFiltered[index]);
             },
           );
         }
         return const Center(
+          heightFactor: 5,
           child: CircularProgressIndicator(),
         );
       }
