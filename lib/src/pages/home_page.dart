@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:taxi_app/src/widgets/bottom_details_widget.dart';
 import 'package:taxi_app/src/widgets/custom_input_widget.dart';
 import 'package:taxi_app/src/widgets/round_button.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../widgets/home_drawer.dart';
 
@@ -23,11 +27,31 @@ class HomePage extends StatelessWidget {
             child: Stack(
           children: [
             // widget to show a map
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Colors.white),
-              // child: _createFlutterMap(context),
+            FlutterMap(
+              options: MapOptions(
+                  center: LatLng(23.065300, -82.291512),
+                  minZoom: 13.0,
+                  maxZoom: 19.0,
+                  zoom: 15.0,
+                  plugins: [
+                    LocationMarkerPlugin(),
+                  ]),
+              nonRotatedChildren: [
+                AttributionWidget.defaultWidget(
+                  source: 'OpenStreetMap contributors',
+                  onSourceTapped: null,
+                ),
+              ],
+              children: [
+                TileLayerWidget(
+                  options: TileLayerOptions(
+                    urlTemplate:
+                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    subdomains: ['a', 'b', 'c'],
+                  ),
+                ),
+                LocationMarkerLayerWidget()
+              ],
             ),
             Column(
               children: [
