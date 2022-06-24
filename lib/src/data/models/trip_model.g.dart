@@ -12,11 +12,11 @@ Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
       time: json['time'] as String,
       distance: (json['distance'] as num).toDouble(),
       price: (json['price'] as num).toDouble(),
-      driverId: json['driverId'] as int,
-      passengerId: json['passengerId'] as int,
+      driver_id: json['driver_id'] as int,
+      passenger_id: json['passenger_id'] as int,
       status: json['status'] as String,
-      originId: json['originId'] as int,
-      destinationId: json['destinationId'] as int,
+      origin_id: json['origin_id'] as int,
+      destination_id: json['destination_id'] as int,
     );
 
 Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
@@ -25,9 +25,9 @@ Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'time': instance.time,
       'distance': instance.distance,
       'price': instance.price,
-      'driverId': instance.driverId,
-      'passengerId': instance.passengerId,
+      'driver_id': instance.driver_id,
+      'passenger_id': instance.passenger_id,
       'status': instance.status,
-      'originId': instance.originId,
-      'destinationId': instance.destinationId,
+      'origin_id': instance.origin_id,
+      'destination_id': instance.destination_id,
     };

@@ -9,11 +9,11 @@ class Trip {
   String time;
   double distance;
   double price;
-  int driverId;
-  int passengerId;
+  int driver_id;
+  int passenger_id;
   String status;
-  int originId;
-  int destinationId;
+  int origin_id;
+  int destination_id;
 
   Trip(
       {required this.id,
@@ -21,11 +21,11 @@ class Trip {
       required this.time,
       required this.distance,
       required this.price,
-      required this.driverId,
-      required this.passengerId,
+      required this.driver_id,
+      required this.passenger_id,
       required this.status,
-      required this.originId,
-      required this.destinationId});
+      required this.origin_id,
+      required this.destination_id});
 
   factory Trip.fromJson(Map<String, dynamic> json) => _$TripFromJson(json);
 
